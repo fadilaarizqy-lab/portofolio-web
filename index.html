@@ -43,7 +43,7 @@
                 <a href="https://wa.me/62895428460832"><i class='bx bxl-whatsapp'></i></a>
                 <a href="https://www.tiktok.com/@padill.jpg"><i class='bx bxl-tiktok'></i></a>
                 <a href="https://www.instagram.com/_pdilzy/"><i class='bx bxl-instagram-alt'></i></a>
-                <a href="Fadila arizqy"><i class='bx bxl-facebook'></i>i></a>
+                <a href="#"><i class='bx bxl-facebook'></i></a>
             </div>
 
             <a href="#" class="btn">Download CV</a>
@@ -131,15 +131,35 @@ Ke depannya, saya ingin terus mengembangkan kemampuan di bidang teknologi dan pe
 
         <form action="#">
             <div class="input-box">
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email Address">
+                <div class="input-field">
+                    <input type="text" placeholder="Full Name" required>
+                    <span class="focus"></span>
+                </div>
+                <div class="input-field">
+                    <input type="email" placeholder="Email Address" required>
+                    <span class="focus"></span>
+                </div>
             </div>
+
             <div class="input-box">
-                <input type="number" placeholder="Mobile Number">
-                <input type="text" placeholder="Email Subject">
+                <div class="input-field">
+                    <input type="number" placeholder="Mobile Number" required>
+                    <span class="focus"></span>
+                </div>
+                <div class="input-field">
+                    <input type="text" placeholder="Email Subject" required>
+                    <span class="focus"></span>
+                </div>
             </div>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-            <input type="submit" value="Send Message" class="btn">
+
+            <div class="textarea-field">
+                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                <span class="focus"></span>
+            </div>
+
+            <div class="btn-box btns">
+                <button type="submit" class="btn">Submit</button>
+            </div>
         </form>
     </section>
 
@@ -153,16 +173,9 @@ Ke depannya, saya ingin terus mengembangkan kemampuan di bidang teknologi dan pe
         </div>
     </footer>
 
-    <!-- 1. Scroll Reveal Library -->
-  
-  <script src="https://unpkg.com/scrollreveal"></script>
-
-    
-    <!-- 2. Typed JS Library -->
+    <!-- Libraries & Custom JS -->
+    <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-
-    <!-- 3. Custom JS -->
     <script src="script.js"></script>
 </body>
 </html>
-
