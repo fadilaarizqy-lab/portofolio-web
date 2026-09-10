@@ -61,7 +61,7 @@ section {
 
 .navbar a:hover,
 .navbar a.active {
-    color: #00abf0;
+    color: #8B0000;
 }
 
 #menu-icon {
@@ -88,7 +88,7 @@ section {
 }
 
 span {
-    color: #00abf0;
+    color: #8B0000;
 }
 
 .home-content h1 {
@@ -125,28 +125,28 @@ span {
     width: 4rem;
     height: 4rem;
     background: transparent;
-    border: .2rem solid #00abf0;
+    border: .2rem solid #8B0000;
     border-radius: 50%;
     font-size: 2rem;
-    color: #00abf0;
+    color: #8B0000;
     margin: 3rem 1.5rem 3rem 0;
     transition: .5s ease;
 }
 
 .social-media a:hover {
-    background: #00abf0;
+    background: #8B0000;
     color: #081b29;
-    box-shadow: 0 0 1rem #00abf0;
+    box-shadow: 0 0 1rem #8B0000;
 }
 
 .btn {
     display: inline-block;
     padding: 1rem 2.8rem;
-    background: #00abf0;
+    background: #8B0000;
     border-radius: 4rem;
-    box-shadow: 0 0 1rem #00abf0;
+    box-shadow: 0 0 1rem #8B0000;
     font-size: 1.6rem;
-    color: #081b29;
+    color: #fff;
     letter-spacing: .1rem;
     font-weight: 600;
     transition: .5s ease;
@@ -212,13 +212,13 @@ span {
 }
 
 .services-container .services-box:hover {
-    border-color: #00abf0;
+    border-color: #8B0000;
     transform: scale(1.02);
 }
 
 .services-box i {
     font-size: 7rem;
-    color: #00abf0;
+    color: #8B0000;
 }
 
 .services-box h3 {
@@ -251,7 +251,7 @@ span {
 .portfolio-container .portfolio-box {
     position: relative;
     border-radius: 2rem;
-    box-shadow: 0 0 1rem #00abf0;
+    box-shadow: 0 0 1rem #8B0000;
     overflow: hidden;
     display: flex;
 }
@@ -271,7 +271,7 @@ span {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .1), #00abf0);
+    background: linear-gradient(rgba(0, 0, 0, .1), #8B0000);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -350,7 +350,7 @@ span {
     color: #fff;
     background: transparent;
     border-radius: .6rem;
-    border: .2rem solid #00abf0;
+    border: .2rem solid #8B0000;
 }
 
 .contact form .input-box .input-field input::placeholder,
@@ -410,18 +410,18 @@ span {
     justify-content: center;
     align-items: center;
     padding: .8rem;
-    background: #00abf0;
+    background: #8B0000;
     border-radius: .8rem;
     transition: .5s ease;
 }
 
 .footer-iconTop a:hover {
-    box-shadow: 0 0 1rem #00abf0;
+    box-shadow: 0 0 1rem #8B0000;
 }
 
 .footer-iconTop a i {
     font-size: 2.4rem;
-    color: #081b29;
+    color: #fff;
 }
 
 /* ==================== RESPONSIVE DESIGN ==================== */
