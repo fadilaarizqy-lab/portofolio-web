@@ -45,7 +45,7 @@ ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
 ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
 
 const typed = new Typed('.multiple-text', {
-    strings: ['Siswa SMKS Krian 1 Sidoarjo', 'Siswa X RPL 1'],
+    strings: ['Siswa SMK Krian 1 Sidoarjo', 'Siswa X RPL 1'],
     typeSpeed: 100,
     backSpeed: 100,
     backDelay: 1000,
