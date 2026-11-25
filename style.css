@@ -196,6 +196,86 @@ span {
     line-height: 1.7;
 }
 
+/* EDUCATION */
+.education h2 {
+    margin-bottom: 5rem;
+}
+
+.education-container {
+    position: relative;
+    max-width: 85rem;
+    margin: 0 auto;
+}
+
+/* Garis timeline */
+.education-container::before {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    bottom: 3rem;
+    left: 4.7rem;
+    width: .2rem;
+    background: var(--light-red);
+    opacity: .6;
+}
+
+.education-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--second-bg-color);
+    border: .2rem solid rgba(178, 34, 34, .25);
+    border-radius: 1.5rem;
+    transition: .4s ease;
+    z-index: 1;
+}
+
+.education-box:hover {
+    border-color: var(--light-red);
+    transform: translateX(.5rem);
+    box-shadow: 0 0 1.5rem rgba(178, 34, 34, .2);
+}
+
+.education-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 5.5rem;
+    height: 5.5rem;
+    background: var(--light-red);
+    border-radius: 50%;
+    color: var(--bg-color);
+    font-size: 2.8rem;
+    z-index: 2;
+}
+
+.education-content {
+    flex: 1;
+}
+
+.education-year {
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--light-red);
+    margin-bottom: .5rem;
+}
+
+.education-content h3 {
+    font-size: 2.2rem;
+    margin-bottom: .5rem;
+}
+
+.education-content p {
+    font-size: 1.5rem;
+    color: #ddd;
+    line-height: 1.6;
+}
+
 /* SERVICES */
 .services h2 {
     margin-bottom: 5rem;
@@ -726,6 +806,20 @@ span {
     .gallery-container {
         grid-template-columns: 1fr;
     }
+
+    /* EDUCATION MOBILE */
+    .education-container {
+        max-width: 100%;
+    }
+
+    .education-box {
+        gap: 1.5rem;
+        padding: 1.8rem;
+    }
+
+    .education-content h3 {
+        font-size: 2rem;
+    }
 }
 
 /* RESPONSIVE SMALL MOBILE */
@@ -750,6 +844,34 @@ span {
 
     .heading {
         font-size: 3.5rem;
+    }
+
+    /* EDUCATION SMALL MOBILE */
+    .education-box {
+        gap: 1.2rem;
+        padding: 1.5rem;
+    }
+
+    .education-icon {
+        width: 4.8rem;
+        height: 4.8rem;
+        font-size: 2.4rem;
+    }
+
+    .education-container::before {
+        left: 3.9rem;
+    }
+
+    .education-content h3 {
+        font-size: 1.8rem;
+    }
+
+    .education-content p {
+        font-size: 1.4rem;
+    }
+
+    .education-year {
+        font-size: 1.3rem;
     }
 }
 
@@ -779,5 +901,4 @@ span {
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
     }
-    }
-    
+}
