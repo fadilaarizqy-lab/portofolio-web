@@ -53,6 +53,7 @@ function updatePage() {
 
 window.addEventListener('scroll', updatePage);
 
+
 /* ===== SCROLL REVEAL ===== */
 if (typeof ScrollReveal !== 'undefined') {
     ScrollReveal({
@@ -79,6 +80,7 @@ if (typeof ScrollReveal !== 'undefined') {
     });
 }
 
+
 /* ===== TYPED JS ===== */
 if (typeof Typed !== 'undefined') {
     const typed = document.querySelector('.multiple-text');
@@ -97,18 +99,93 @@ if (typeof Typed !== 'undefined') {
     }
 }
 
-/* ===== CONTACT FORM ===== */
-let contactForm = document.querySelector('.contact form');
 
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+/* ===== CONTACT FORM WITH EMAILJS ===== */
 
-        alert('Terima kasih! Pesan kamu berhasil dikirim.');
+// KONFIGURASI EMAILJS
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
-        contactForm.reset();
+const contactForm = document.querySelector('#contact-form');
+const sendButton = document.querySelector('#send-btn');
+const formStatus = document.querySelector('#form-status');
+
+// Inisialisasi EmailJS
+if (typeof emailjs !== 'undefined') {
+    emailjs.init({
+        publicKey: EMAILJS_PUBLIC_KEY
     });
 }
+
+// Proses pengiriman pesan
+if (contactForm) {
+
+    contactForm.addEventListener('submit', async function(e) {
+
+        e.preventDefault();
+
+        if (typeof emailjs === 'undefined') {
+            formStatus.textContent =
+                'Layanan email belum berhasil dimuat. Silakan coba kembali.';
+
+            formStatus.className = 'error';
+            return;
+        }
+
+        if (
+            EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY' ||
+            EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' ||
+            EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID'
+        ) {
+            formStatus.textContent =
+                'Konfigurasi EmailJS belum diatur.';
+
+            formStatus.className = 'error';
+            return;
+        }
+
+        sendButton.disabled = true;
+        sendButton.textContent = 'Sending...';
+
+        formStatus.textContent = '';
+        formStatus.className = '';
+
+        try {
+
+            await emailjs.sendForm(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                contactForm
+            );
+
+            formStatus.textContent =
+                'Pesan berhasil dikirim! Terima kasih sudah menghubungi saya.';
+
+            formStatus.className = 'success';
+
+            contactForm.reset();
+
+        } catch (error) {
+
+            console.error('EmailJS Error:', error);
+
+            formStatus.textContent =
+                'Pesan gagal dikirim. Silakan periksa koneksi atau coba kembali.';
+
+            formStatus.className = 'error';
+
+        } finally {
+
+            sendButton.disabled = false;
+            sendButton.textContent = 'Send Message';
+
+        }
+
+    });
+
+}
+
 
 /* ===== SERVICE GALLERY ===== */
 const servicesSection = document.querySelector('.services');
@@ -135,6 +212,7 @@ const serviceData = {
         description: 'Berikut adalah kumpulan hasil desain kreatif yang telah saya buat.'
     }
 };
+
 
 /* ===== OPEN SERVICE GALLERY ===== */
 serviceButtons.forEach(button => {
@@ -171,6 +249,7 @@ serviceButtons.forEach(button => {
     });
 });
 
+
 /* ===== BACK TO SERVICES ===== */
 if (backService) {
     backService.addEventListener('click', function() {
@@ -189,6 +268,7 @@ if (backService) {
         });
     });
 }
+
 
 /* ===== FLOATING SPARKLES ===== */
 for (let i = 0; i < 22; i++) {
