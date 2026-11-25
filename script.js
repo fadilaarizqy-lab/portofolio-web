@@ -28,7 +28,7 @@ function updatePage() {
                 link.classList.remove('active');
 
                 let activeLink = document.querySelector(
-                    'header nav a[href*="' + id + '"]'
+                    'header nav a[href="#' + id + '"]'
                 );
 
                 if (activeLink) {
@@ -77,6 +77,21 @@ if (typeof ScrollReveal !== 'undefined') {
 
     ScrollReveal().reveal('.home-content p, .about-content', {
         origin: 'right'
+    });
+
+    /* ANIMASI EDUCATION */
+    ScrollReveal().reveal('.education-box', {
+        origin: 'bottom',
+        distance: '50px',
+        duration: 1500,
+        interval: 200
+    });
+
+    ScrollReveal().reveal('.education-icon', {
+        origin: 'left',
+        distance: '30px',
+        duration: 1500,
+        interval: 200
     });
 }
 
@@ -283,4 +298,5 @@ for (let i = 0; i < 22; i++) {
     sparkle.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
 
     document.body.appendChild(sparkle);
-}
+    }
+                       
