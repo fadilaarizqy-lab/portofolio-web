@@ -135,16 +135,15 @@ if (typeof emailjs !== 'undefined') {
 
 // Proses pengiriman pesan
 if (contactForm) {
-
     contactForm.addEventListener('submit', async function(e) {
-
         e.preventDefault();
 
         if (typeof emailjs === 'undefined') {
-            formStatus.textContent =
-                'Layanan email belum berhasil dimuat. Silakan coba kembali.';
-
-            formStatus.className = 'error';
+            if (formStatus) {
+                formStatus.textContent =
+                    'Layanan email belum berhasil dimuat. Silakan coba kembali.';
+                formStatus.className = 'error';
+            }
             return;
         }
 
@@ -153,52 +152,51 @@ if (contactForm) {
             EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' ||
             EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID'
         ) {
-            formStatus.textContent =
-                'Konfigurasi EmailJS belum diatur.';
-
-            formStatus.className = 'error';
+            if (formStatus) {
+                formStatus.textContent =
+                    'Konfigurasi EmailJS belum diatur.';
+                formStatus.className = 'error';
+            }
             return;
         }
 
         sendButton.disabled = true;
         sendButton.textContent = 'Sending...';
 
-        formStatus.textContent = '';
-        formStatus.className = '';
+        if (formStatus) {
+            formStatus.textContent = '';
+            formStatus.className = '';
+        }
 
         try {
-
             await emailjs.sendForm(
                 EMAILJS_SERVICE_ID,
                 EMAILJS_TEMPLATE_ID,
                 contactForm
             );
 
-            formStatus.textContent =
-                'Pesan berhasil dikirim! Terima kasih sudah menghubungi saya.';
-
-            formStatus.className = 'success';
+            if (formStatus) {
+                formStatus.textContent =
+                    'Pesan berhasil dikirim! Terima kasih sudah menghubungi saya.';
+                formStatus.className = 'success';
+            }
 
             contactForm.reset();
 
         } catch (error) {
-
             console.error('EmailJS Error:', error);
 
-            formStatus.textContent =
-                'Pesan gagal dikirim. Silakan periksa koneksi atau coba kembali.';
-
-            formStatus.className = 'error';
+            if (formStatus) {
+                formStatus.textContent =
+                    'Pesan gagal dikirim. Silakan periksa koneksi atau coba kembali.';
+                formStatus.className = 'error';
+            }
 
         } finally {
-
             sendButton.disabled = false;
             sendButton.textContent = 'Send Message';
-
         }
-
     });
-
 }
 
 
@@ -211,27 +209,90 @@ const galleryDescription = document.querySelector('#gallery-description');
 const galleryContainer = document.querySelector('#gallery-container');
 const backService = document.querySelector('#back-service');
 
-const serviceData = {
-    web: {
-        title: 'Web Development',
-        description: 'Berikut adalah kumpulan hasil karya website yang telah saya buat.'
-    },
 
-    uiux: {
-        title: 'UI/UX Design',
-        description: 'Berikut adalah kumpulan hasil rancangan tampilan antarmuka yang telah saya buat.'
+/* ===== DATA KARYA SERVICES ===== */
+const serviceData = {
+
+    typography: {
+        title: 'Typography Designer',
+        description: 'Berikut adalah kumpulan karya tipografi yang telah saya buat.',
+        works: [
+            // Tambahkan karya PNG tipografi kamu di sini
+            // Contoh:
+            // {
+            //     image: 'tipografi1.png',
+            //     title: 'Typography 01'
+            // }
+        ]
     },
 
     graphic: {
-        title: 'Graphic Design',
-        description: 'Berikut adalah kumpulan hasil desain kreatif yang telah saya buat.'
+        title: 'Graphic Designer',
+        description: 'Berikut adalah kumpulan hasil karya desain grafis yang telah saya buat.',
+        works: [
+            // Tambahkan karya PNG desain grafis kamu di sini
+            // Contoh:
+            // {
+            //     image: 'graphic1.png',
+            //     title: 'Graphic Design 01'
+            // }
+        ]
     }
+
 };
+
+
+/* ===== DISPLAY GALLERY ===== */
+function displayGallery(works) {
+
+    if (!galleryContainer) return;
+
+    if (!works || works.length === 0) {
+        galleryContainer.innerHTML = `
+            <div class="gallery-empty">
+                <i class='bx bx-folder-open'></i>
+                <h3>My Works</h3>
+                <p>Karya akan segera ditampilkan di sini.</p>
+            </div>
+        `;
+        return;
+    }
+
+    galleryContainer.innerHTML = '';
+
+    works.forEach(work => {
+
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+
+        const image = document.createElement('img');
+        image.src = work.image;
+        image.alt = work.title || 'My Design';
+        image.loading = 'lazy';
+
+        const title = document.createElement('h3');
+        title.textContent = work.title || 'My Work';
+
+        const imageLink = document.createElement('a');
+        imageLink.href = work.image;
+        imageLink.target = '_blank';
+        imageLink.rel = 'noopener noreferrer';
+        imageLink.appendChild(image);
+
+        galleryItem.appendChild(imageLink);
+        galleryItem.appendChild(title);
+
+        galleryContainer.appendChild(galleryItem);
+
+    });
+}
 
 
 /* ===== OPEN SERVICE GALLERY ===== */
 serviceButtons.forEach(button => {
+
     button.addEventListener('click', function(e) {
+
         e.preventDefault();
 
         const category = this.dataset.category;
@@ -244,13 +305,7 @@ serviceButtons.forEach(button => {
         galleryTitle.textContent = selectedService.title;
         galleryDescription.textContent = selectedService.description;
 
-        galleryContainer.innerHTML = `
-            <div class="gallery-empty">
-                <i class='bx bx-folder-open'></i>
-                <h3>My Works</h3>
-                <p>Hasil karya akan ditampilkan di sini.</p>
-            </div>
-        `;
+        displayGallery(selectedService.works);
 
         servicesSection.classList.add('viewing-gallery');
         serviceGallery.classList.add('active');
@@ -261,13 +316,17 @@ serviceButtons.forEach(button => {
             behavior: 'smooth',
             block: 'start'
         });
+
     });
+
 });
 
 
 /* ===== BACK TO SERVICES ===== */
 if (backService) {
+
     backService.addEventListener('click', function() {
+
         if (!servicesSection || !serviceGallery) {
             return;
         }
@@ -281,12 +340,15 @@ if (backService) {
             behavior: 'smooth',
             block: 'start'
         });
+
     });
+
 }
 
 
 /* ===== FLOATING SPARKLES ===== */
 for (let i = 0; i < 22; i++) {
+
     let sparkle = document.createElement('div');
 
     sparkle.className = 'sparkle';
@@ -298,5 +360,6 @@ for (let i = 0; i < 22; i++) {
     sparkle.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
 
     document.body.appendChild(sparkle);
-    }
-                       
+
+                }
+        
