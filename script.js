@@ -10,6 +10,7 @@ if (menuIcon && navbar) {
     };
 }
 
+
 /* ===== ACTIVE NAVBAR & STICKY HEADER ===== */
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
@@ -112,6 +113,32 @@ if (typeof Typed !== 'undefined') {
             loop: true
         });
     }
+}
+
+
+/* ===== ABOUT READ MORE ===== */
+const aboutReadMore = document.querySelector('#about-read-more');
+const aboutMoreInfo = document.querySelector('#about-more-info');
+
+if (aboutReadMore && aboutMoreInfo) {
+    aboutReadMore.addEventListener('click', function() {
+
+        const isHidden = aboutMoreInfo.hidden;
+
+        aboutMoreInfo.hidden = !isHidden;
+
+        if (isHidden) {
+            this.textContent = 'Read Less';
+
+            aboutMoreInfo.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        } else {
+            this.textContent = 'Read More';
+        }
+
+    });
 }
 
 
@@ -218,11 +245,6 @@ const serviceData = {
         description: 'Berikut adalah kumpulan karya tipografi yang telah saya buat.',
         works: [
             // Tambahkan karya PNG tipografi kamu di sini
-            // Contoh:
-            // {
-            //     image: 'tipografi1.png',
-            //     title: 'Typography 01'
-            // }
         ]
     },
 
@@ -231,11 +253,6 @@ const serviceData = {
         description: 'Berikut adalah kumpulan hasil karya desain grafis yang telah saya buat.',
         works: [
             // Tambahkan karya PNG desain grafis kamu di sini
-            // Contoh:
-            // {
-            //     image: 'graphic1.png',
-            //     title: 'Graphic Design 01'
-            // }
         ]
     }
 
@@ -346,6 +363,128 @@ if (backService) {
 }
 
 
+/* ===== PORTFOLIO DETAIL DATA ===== */
+const portfolioData = {
+
+    wordpress: {
+        title: 'WordPress',
+        description: 'WordPress merupakan platform yang digunakan untuk membuat dan mengelola website. Dalam proyek ini, saya mempelajari materi perakitan PC maupun komputer sebagai bagian dari proses pembelajaran.',
+        extra: 'Hal yang dipelajari: mengenal komponen komputer dan proses perakitan PC.',
+        link: 'https://fadilla576.wordpress.com'
+    },
+
+    colab: {
+        title: 'Google Colab',
+        description: 'Google Colab merupakan platform online yang saya gunakan untuk belajar dan menjalankan coding Python. Melalui proyek ini, saya mencoba membuat program sederhana sekaligus memahami dasar pemrograman Python.',
+        extra: 'Hal yang dipelajari: dasar pemrograman Python dan menjalankan kode secara online.',
+        link: 'https://colab.research.google.com/drive/1eYmKiCG1F3gE03JYP0GcZStVjzBCPuou'
+    },
+
+    kangkung: {
+        title: 'Budi Daya Kangkung dan Ketahanan Pangan',
+        description: 'Proyek pembelajaran mengenai budi daya tanaman kangkung, mulai dari mengenal proses penanaman hingga memahami pentingnya ketahanan pangan.',
+        extra: 'Hal yang dipelajari: proses budi daya kangkung dan pentingnya menjaga ketahanan pangan.',
+        link: ''
+    }
+
+};
+
+
+/* ===== PORTFOLIO DETAIL ELEMENTS ===== */
+const portfolioButtons = document.querySelectorAll('.portfolio-detail-btn');
+const portfolioList = document.querySelector('#portfolio-list');
+const portfolioDetail = document.querySelector('#portfolio-detail');
+const portfolioBack = document.querySelector('#portfolio-back');
+
+const detailImage = document.querySelector('#detail-image');
+const detailTitle = document.querySelector('#detail-title');
+const detailDescription = document.querySelector('#detail-description');
+const detailExtra = document.querySelector('#detail-extra');
+const detailLink = document.querySelector('#detail-link');
+
+
+/* ===== OPEN PORTFOLIO DETAIL ===== */
+portfolioButtons.forEach(button => {
+
+    button.addEventListener('click', function() {
+
+        const projectName = this.dataset.project;
+        const project = portfolioData[projectName];
+
+        if (!project || !portfolioList || !portfolioDetail) {
+            return;
+        }
+
+        const projectBox = this.closest('.portfolio-box');
+        const projectImage = projectBox
+            ? projectBox.querySelector('img')
+            : null;
+
+        if (projectImage && detailImage) {
+            detailImage.src = projectImage.src;
+            detailImage.alt = project.title;
+        }
+
+        if (detailTitle) {
+            detailTitle.textContent = project.title;
+        }
+
+        if (detailDescription) {
+            detailDescription.textContent = project.description;
+        }
+
+        if (detailExtra) {
+            detailExtra.textContent = project.extra;
+        }
+
+        if (detailLink) {
+            if (project.link) {
+                detailLink.href = project.link;
+                detailLink.style.display = 'inline-flex';
+            } else {
+                detailLink.style.display = 'none';
+            }
+        }
+
+        portfolioList.hidden = true;
+        portfolioDetail.hidden = false;
+
+        history.replaceState(null, '', '#portfolio');
+
+        portfolioDetail.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+    });
+
+});
+
+
+/* ===== BACK TO PORTFOLIO ===== */
+if (portfolioBack) {
+
+    portfolioBack.addEventListener('click', function() {
+
+        if (!portfolioList || !portfolioDetail) {
+            return;
+        }
+
+        portfolioDetail.hidden = true;
+        portfolioList.hidden = false;
+
+        history.replaceState(null, '', '#portfolio');
+
+        portfolioList.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+    });
+
+}
+
+
 /* ===== FLOATING SPARKLES ===== */
 for (let i = 0; i < 22; i++) {
 
@@ -362,4 +501,4 @@ for (let i = 0; i < 22; i++) {
     document.body.appendChild(sparkle);
 
                 }
-        
+    
