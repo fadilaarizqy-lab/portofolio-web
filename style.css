@@ -207,7 +207,6 @@ span {
     margin: 0 auto;
 }
 
-/* Garis timeline */
 .education-container::before {
     content: '';
     position: absolute;
@@ -283,8 +282,10 @@ span {
 
 .services-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.5rem;
+    max-width: 90rem;
+    margin: 0 auto;
 }
 
 .services-box {
@@ -368,8 +369,50 @@ span {
 
 .gallery-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 2.5rem;
+}
+
+/* GALLERY ITEM */
+.gallery-item {
+    background: var(--second-bg-color);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    border: .2rem solid rgba(178, 34, 34, .25);
+    text-align: center;
+    overflow: hidden;
+    transition: .4s ease;
+}
+
+.gallery-item:hover {
+    border-color: var(--light-red);
+    transform: translateY(-.5rem);
+    box-shadow: 0 0 1.5rem rgba(178, 34, 34, .2);
+}
+
+.gallery-item a {
+    display: block;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #1b080d;
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: 28rem;
+    object-fit: contain;
+    transition: .4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+.gallery-item h3 {
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    color: var(--text-color);
 }
 
 .gallery-empty {
@@ -873,6 +916,10 @@ span {
     .education-year {
         font-size: 1.3rem;
     }
+
+    .gallery-item img {
+        height: 25rem;
+    }
 }
 
 /* RESPONSIVE VERY SMALL MOBILE */
@@ -901,4 +948,4 @@ span {
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
     }
-}
+    }
